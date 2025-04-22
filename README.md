@@ -1,12 +1,20 @@
-# React + Vite
+# Pokedex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pokedex fait en deux heure sur la base de l'API présente ici : https://github.com/zkerkeb-class/api-pokemon-FabienArthurYnov
+Dans le cadre d'un cours afin de découvrir la technologie React.
 
-Currently, two official plugins are available:
+### Pour lancer ; 
+```sh
+git clone https://github.com/zkerkeb-class/api-pokemon-FabienArthurYnov
+git clone https://github.com/Fafacraft/PokedexFront
+cd api-pokemon-FabienArthurYnov
+npm start
+cd ../PokedexFront
+npm run dev
+```
+Allez sur http://localhost:5173/ avec votre navigateur favoris
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![image](https://github.com/user-attachments/assets/5cbd1674-abbb-417f-b78e-62b92684894c)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Par Fabien ARTHUR
