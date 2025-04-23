@@ -1,49 +1,19 @@
-import { useState } from 'react'
-import { useEffect } from 'react';
-import reactLogo from '../assets/react.svg'
-import React from 'react';
-import axios from "axios";
-import viteLogo from '/vite.svg'
-import './App.css'
-import PokemonCard from "../components/pokemonCard/pokemonCard";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Login from "./login/Login.jsx";
+import PokemonList from "./pokemonList/PokemonList.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [pokemons, setPokemons] = useState([]);
-
-  // only at loading, because of the second param []
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/pokemons')
-      .then(response => {
-        const pokemonArray = response.data.pokemons; // get all pokemons
-        setPokemons(pokemonArray);
-      })
-      .catch(error => {
-        console.error('Error fetching pokemons:', error);
-      });
-  }, []);
-
-  // else it crash as it does the useEffect in a second time
-  if (!pokemons.length) return (<div>Loading...</div>);
-  console.log(pokemons[0].base.HP);
-
   return (
-    <>
-      {pokemons.map((pokemon, index) => (
-        <PokemonCard key={index} 
-          nameEnglish={pokemon.name.english}
-          nameFrench={pokemon.name.french}
-          HP={pokemon.base.HP}
-          ATK={pokemon.base.Attack}
-          DEF={pokemon.base.Defense}
-          SPEATK={pokemon.base["Sp. Attack"]}
-          SPEDEF={pokemon.base["Sp. Defense"]}
-          SPEED={pokemon.base.Speed}
-          image={pokemon.image}
-          types={pokemon.type} /> 
-      ))}
-    </>
-  )
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Login</Link> | <Link to="/pokemons">Pokemons</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/pokemons" element={<PokemonList />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

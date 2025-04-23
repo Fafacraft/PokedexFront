@@ -1,7 +1,7 @@
 # Pokedex
 
-Pokedex fait en deux heure sur la base de l'API présente ici : https://github.com/zkerkeb-class/api-pokemon-FabienArthurYnov
-Dans le cadre d'un cours afin de découvrir la technologie React.
+Pokedex sur la base de l'API présente ici : https://github.com/zkerkeb-class/api-pokemon-FabienArthurYnov
+Dans le cadre de cours afin de découvrir la technologie React.
 
 ### Pour lancer ; 
 ```sh
