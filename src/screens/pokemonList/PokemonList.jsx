@@ -22,7 +22,6 @@ function PokemonList() {
 
   // else it crash as it does the useEffect in a second time
   if (!pokemons.length) return (<div>Loading...</div>);
-  console.log(pokemons[0].base.HP);
 
   return (
     <>
