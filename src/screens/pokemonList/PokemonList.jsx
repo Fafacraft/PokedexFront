@@ -4,12 +4,20 @@ import React from 'react';
 import axios from "axios";
 import './PokemonList.css'
 import PokemonCard from "../../components/pokemonCard/pokemonCard";
+import { useNavigate } from 'react-router';
 
 function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
+  const navigate = useNavigate();
+  const loginToken = sessionStorage.getItem("loginToken");
+
 
   // only at loading, because of the second param []
   useEffect(() => {
+    if (!loginToken) {
+      navigate("/");
+    }
+
     axios.get('http://localhost:3000/api/pokemons')
       .then(response => {
         const pokemonArray = response.data.pokemons; // get all pokemons

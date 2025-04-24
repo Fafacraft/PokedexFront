@@ -3,6 +3,8 @@ import { useState } from "react";
 import "./Login.css";
 import PokemonLogo from "../../assets/PokemonLogo.webp"
 import { useNavigate } from "react-router";
+import bcrypt from "bcryptjs";
+import axios from "axios";
 
 
 function Login() {
@@ -12,7 +14,14 @@ function Login() {
     const [badPassword, setBadPassword] = useState(false)
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+
+    const hashedPassword = async (password) => {
+        const saltRounds = 5;
+        const hashed = await bcrypt.hash(password, saltRounds);
+        return hashed;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault(); // else submitting refresh the page and error message disappear
 
         const isBadLogin = login.length < 3;
@@ -23,27 +32,45 @@ function Login() {
 
         if (isBadLogin || isBadPassword) return;
 
-        navigate("/pokemons");
+        const hashed = await hashedPassword(password);
+
+        const loginData = {
+            login: login,
+            password: hashed,
+        }
+
+        // initiate session
+        try {
+            const response = await axios.post("http://localhost:3000/api/login", loginData);
+            const loginToken = response.data;
+
+            sessionStorage.setItem("loginToken", JSON.stringify(loginToken));
+
+            navigate("/pokemons");
+
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     }
 
     return (
         <>
-        <form class="login-form" onSubmit={handleSubmit}>
-            <img src={PokemonLogo} alt="Pokemon Logo" className="pokemon-logo"></img>
-            <h2>Pokedex</h2>
-            <div class="form-group">
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login" value={login} onChange={(e) => {setLogin(e.target.value)}} />
-            {badLogin && (<span class="loginError">Le login doit faire au moins 3 caractères.</span>)}
-            </div>
-            <div class="form-group">
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
-            {badPassword && (<span class="loginError">Le mot de passe doit faire au moins 8 caractères.</span>)}
-            </div>
-            <button type="submit" class="login-button">Se connecter</button>
-            <span class="debug_info">Faux login, ne pas mettre d'information importantes</span>
-        </form>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <img src={PokemonLogo} alt="Pokemon Logo" className="pokemon-logo"></img>
+                <h2>Pokedex</h2>
+                <div className="form-group">
+                    <label htmlFor="login">Login:</label>
+                    <input type="text" id="login" name="login" value={login} onChange={(e) => { setLogin(e.target.value) }} />
+                    {badLogin && (<span className="loginError">Le login doit faire au moins 3 caractères.</span>)}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Mot de passe:</label>
+                    <input type="password" id="password" name="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                    {badPassword && (<span className="loginError">Le mot de passe doit faire au moins 8 caractères.</span>)}
+                </div>
+                <button type="submit" className="login-button">Se connecter</button>
+                <span className="debug_info">Faux login, ne pas mettre d'information importantes</span>
+            </form>
         </>
     )
 }
