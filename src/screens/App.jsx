@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./login/Login.jsx";
 import PokemonList from "./pokemonList/PokemonList.jsx";
-import Logout from "./Logout/Logout.jsx"
+import Logout from "./Logout/Logout.jsx";
+import PokemonDetail from "./pokemonDetail/PokemonDetail.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/pokemons" element={<PokemonList />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/pokemon/:id" element={<PokemonDetail />} />
       </Routes>
     </BrowserRouter>
   );

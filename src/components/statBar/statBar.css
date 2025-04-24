@@ -1,0 +1,30 @@
+
+.stat-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.stat-label {
+width: 100px;
+font-weight: bold;
+}
+
+.stat-bar-bg {
+flex: 1;
+height: 10px;
+background-color: #ddd;
+margin: 0 10px;
+border-radius: 4px;
+overflow: hidden;
+}
+
+.stat-bar {
+height: 100%;
+background-color: black;
+}
+
+.stat-value {
+width: 40px;
+text-align: right;
+}

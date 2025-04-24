@@ -44,7 +44,8 @@ function PokemonList() {
           SPEDEF={pokemon.base["Sp. Defense"]}
           SPEED={pokemon.base.Speed}
           image={pokemon.image}
-          types={pokemon.type} />
+          types={pokemon.type}
+          id={pokemon.id} />
       ))}
     </>
   )
