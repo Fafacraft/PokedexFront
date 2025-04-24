@@ -34,7 +34,7 @@ function PokemonList() {
   return (
     <>
       {pokemons.map((pokemon, index) => (
-        <PokemonCard key={index} 
+        <PokemonCard key={index}
           nameEnglish={pokemon.name.english}
           nameFrench={pokemon.name.french}
           HP={pokemon.base.HP}
@@ -44,7 +44,7 @@ function PokemonList() {
           SPEDEF={pokemon.base["Sp. Defense"]}
           SPEED={pokemon.base.Speed}
           image={pokemon.image}
-          types={pokemon.type} /> 
+          types={pokemon.type} />
       ))}
     </>
   )
