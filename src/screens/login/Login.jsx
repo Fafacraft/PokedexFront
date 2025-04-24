@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Login.css";
 import PokemonLogo from "../../assets/PokemonLogo.webp"
@@ -13,6 +13,7 @@ function Login() {
     const [badLogin, setBadLogin] = useState(false);
     const [badPassword, setBadPassword] = useState(false)
     const navigate = useNavigate();
+    const loginToken = sessionStorage.getItem("loginToken");
 
 
     const hashedPassword = async (password) => {
@@ -52,6 +53,12 @@ function Login() {
             console.error("Error during login:", error);
         }
     }
+
+    useEffect(() => {
+        if (loginToken) {
+          navigate("/pokemons");
+        }
+    })
 
     return (
         <>
